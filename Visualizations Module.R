@@ -505,8 +505,8 @@ visualization_server <- function(input, output, session, user_inputs, parsing, d
   output$fragment_map_plot <- renderPlot(
     fragment_map(),
     width = 650,
-    #height = #reactive({(max(parsing$precursor_parsed()$position) %/% 10 + 1)*30}),
-    res = 300
+    height = reactive({(max(parsing$precursor_parsed()$position) %/% 10 + 1)*50+25}),
+    res = 75
   )
   
 
@@ -563,8 +563,8 @@ visualization_server <- function(input, output, session, user_inputs, parsing, d
   output$selected_visualization_plot <- renderPlot(
     selected_visualization(),
     #width = 1000,
-    height = 500,
-    res = 300
+    height = 400,
+    res = 75
   )
   
   
@@ -584,7 +584,7 @@ visualization_UI <- function(id){
         downloadButton(ns("fragment_identifications_download"), 
           "Download Fragment Identifications"
         ),
-        plotOutput(ns("fragment_map_plot")),
+        plotOutput(ns("fragment_map_plot"), inline = T),
         textOutput(ns("sequence_coverage_text")),
         textOutput(ns("p_score_text")),
         plotlyOutput(ns("annotated_spectrum_plotly"))
